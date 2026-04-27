@@ -1,0 +1,1003 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ladybug Stitch Co. | Custom Handcrafted Embroidery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── VARIABLES ──────────────────────────────── */
+    :root {
+      --pink-pale:   #FEF0F3;
+      --pink-light:  #F9D1DA;
+      --pink:        #F0A8B8;
+      --pink-dark:   #D4788E;
+      --beige-light: #FDF8F3;
+      --beige:       #F2E8DC;
+      --beige-dark:  #DECCB8;
+      --ladybug-red: #C8304A;
+      --ladybug-dk:  #8B1A2A;
+      --spot:        #2C1810;
+      --text-dark:   #3D2315;
+      --text-mid:    #6B4535;
+      --text-light:  #9B7B6A;
+      --white:       #FFFFFF;
+      --shadow:      0 4px 24px rgba(61,35,21,.10);
+      --radius:      14px;
+      --transition:  .3s ease;
+    }
+
+    /* ── RESET ──────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Lato', sans-serif;
+      background: var(--beige-light);
+      color: var(--text-dark);
+      line-height: 1.7;
+    }
+    img { max-width: 100%; display: block; }
+    a  { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    h1,h2,h3,h4 { font-family: 'Playfair Display', serif; line-height: 1.25; }
+
+    /* ── UTILITIES ──────────────────────────────── */
+    .container  { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .section    { padding: 80px 0; }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      color: var(--text-dark);
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      color: var(--text-mid);
+      font-size: 1.05rem;
+      margin-bottom: 48px;
+    }
+    .center { text-align: center; }
+    .btn {
+      display: inline-block;
+      padding: 13px 32px;
+      border-radius: 50px;
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      font-size: .95rem;
+      letter-spacing: .5px;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+    }
+    .btn-primary {
+      background: var(--ladybug-red);
+      color: var(--white);
+    }
+    .btn-primary:hover { background: var(--ladybug-dk); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(200,48,74,.35); }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--white);
+      color: var(--white);
+    }
+    .btn-outline:hover { background: var(--white); color: var(--ladybug-red); transform: translateY(-2px); }
+
+    /* ── NAVBAR ─────────────────────────────────── */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(253,248,243,.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--beige);
+      transition: box-shadow var(--transition);
+    }
+    #navbar.scrolled { box-shadow: var(--shadow); }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 70px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: var(--text-dark);
+      font-weight: 700;
+    }
+    .nav-links {
+      display: flex; align-items: center; gap: 32px;
+    }
+    .nav-links a {
+      font-size: .9rem;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      transition: color var(--transition);
+    }
+    .nav-links a:hover { color: var(--ladybug-red); }
+    .nav-cta {
+      background: var(--ladybug-red);
+      color: white !important;
+      padding: 9px 22px;
+      border-radius: 50px;
+    }
+    .nav-cta:hover { background: var(--ladybug-dk) !important; color: white !important; }
+    .hamburger {
+      display: none;
+      flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--text-dark); border-radius: 2px;
+      transition: var(--transition);
+    }
+    #mobile-nav {
+      display: none; flex-direction: column;
+      background: var(--beige-light);
+      border-top: 1px solid var(--beige-dark);
+      padding: 16px 24px 24px; gap: 4px;
+    }
+    #mobile-nav.open { display: flex; }
+    #mobile-nav a {
+      padding: 12px 0; font-weight: 700; font-size: .95rem;
+      color: var(--text-mid); border-bottom: 1px solid var(--beige);
+      text-transform: uppercase; letter-spacing: .5px;
+    }
+    #mobile-nav a:hover { color: var(--ladybug-red); }
+
+    /* ── HERO ───────────────────────────────────── */
+    #hero {
+      display: flex; align-items: center;
+      background: linear-gradient(135deg, var(--pink-pale) 0%, var(--beige-light) 60%, var(--beige) 100%);
+      padding: 120px 0 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg-dots {
+      position: absolute; inset: 0; pointer-events: none;
+    }
+    .hero-grid {
+      display: grid; grid-template-columns: 1fr;
+      align-items: center; gap: 60px;
+      position: relative; z-index: 1;
+      max-width: 700px;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--pink-light); border-radius: 50px;
+      padding: 7px 18px; font-size: .85rem; font-weight: 700;
+      color: var(--ladybug-dk); letter-spacing: .5px; margin-bottom: 24px;
+    }
+    .hero-title {
+      font-size: clamp(2.6rem, 5.5vw, 4rem);
+      margin-bottom: 20px; color: var(--text-dark);
+    }
+    .hero-title em { color: var(--ladybug-red); font-style: italic; }
+    .hero-sub {
+      font-size: 1.1rem; color: var(--text-mid);
+      margin-bottom: 36px; max-width: 480px; font-weight: 300;
+    }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-btns .btn-outline-red {
+      background: transparent;
+      border: 2px solid var(--ladybug-red);
+      color: var(--ladybug-red);
+      padding: 13px 32px; border-radius: 50px;
+      font-family: 'Lato', sans-serif; font-weight: 700;
+      font-size: .95rem; letter-spacing: .5px; cursor: pointer;
+      transition: var(--transition);
+      display: inline-block;
+    }
+    .hero-btns .btn-outline-red:hover { background: var(--ladybug-red); color: white; transform: translateY(-2px); }
+    .hero-image-col {
+      display: flex; justify-content: center;
+    }
+    .hero-frame {
+      width: 420px; height: 480px;
+      border-radius: 220px 220px 180px 180px;
+      background: var(--pink-light);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(200,48,74,.15);
+    }
+    .hero-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ── FEATURES ───────────────────────────────── */
+    #features {
+      background: var(--beige);
+      padding: 36px 0;
+      border-top: 1px solid var(--beige-dark);
+      border-bottom: 1px solid var(--beige-dark);
+    }
+    .features-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+    }
+    .feature-item { display: flex; align-items: center; gap: 14px; }
+    .feature-icon {
+      width: 48px; height: 48px; flex-shrink: 0;
+      background: var(--pink-light); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
+    }
+    .feature-item h4 { font-size: .95rem; font-family: 'Lato', sans-serif; font-weight: 700; }
+    .feature-item p  { font-size: .82rem; color: var(--text-light); }
+
+    /* ── GALLERY ────────────────────────────────── */
+    #gallery { background: var(--white); }
+    .gallery-intro { max-width: 560px; margin: 0 auto 48px; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .gallery-item {
+      border-radius: 12px; overflow: hidden;
+      background: var(--pink-pale);
+      cursor: pointer; position: relative;
+      aspect-ratio: 1 / 1;
+    }
+    .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .gallery-item .g-placeholder {
+      display: flex; align-items: center; justify-content: center;
+      height: 100%; min-height: 160px;
+      flex-direction: column; gap: 8px;
+      font-size: .85rem; color: var(--text-light);
+    }
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: rgba(200,48,74,.75);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: var(--transition);
+      color: white; font-size: 1.8rem;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-cta { text-align: center; margin-top: 48px; }
+
+    /* ── ABOUT ──────────────────────────────────── */
+    #about {
+      background: linear-gradient(135deg, var(--pink-pale) 0%, var(--beige) 100%);
+    }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center;
+    }
+    .about-image {
+      border-radius: 200px 200px 120px 120px; overflow: hidden;
+      height: 460px; background: var(--pink-light);
+      box-shadow: var(--shadow);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .about-image img { width: 100%; height: 100%; object-fit: cover; }
+    .about-content .section-title { margin-bottom: 20px; }
+    .about-content p { color: var(--text-mid); margin-bottom: 16px; font-size: 1.02rem; }
+    .about-stats { display: flex; gap: 32px; margin-top: 32px; margin-bottom: 32px; }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 700; color: var(--ladybug-red);
+    }
+    .stat-label { font-size: .82rem; color: var(--text-light); text-transform: uppercase; letter-spacing: .5px; }
+
+    /* ── HOW IT WORKS ───────────────────────────── */
+    #how-it-works { background: var(--beige-light); }
+    .steps-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+      position: relative;
+    }
+    .steps-grid::before {
+      content: '';
+      position: absolute; top: 36px; left: 12%; right: 12%; height: 2px;
+      background: linear-gradient(to right, var(--pink-light), var(--ladybug-red), var(--pink-light));
+      z-index: 0;
+    }
+    .step-card {
+      text-align: center; position: relative; z-index: 1;
+      background: var(--white); border-radius: var(--radius);
+      padding: 32px 20px; box-shadow: var(--shadow);
+    }
+    .step-circle {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--ladybug-red), var(--ladybug-dk));
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 700; color: white;
+      box-shadow: 0 6px 20px rgba(200,48,74,.3);
+    }
+    .step-card h4 { font-size: 1rem; margin-bottom: 8px; color: var(--text-dark); }
+    .step-card p  { font-size: .88rem; color: var(--text-light); }
+
+    /* ── ORDER FORM ─────────────────────────────── */
+    #order {
+      background: linear-gradient(135deg, var(--ladybug-red) 0%, var(--ladybug-dk) 100%);
+      position: relative; overflow: hidden;
+    }
+    #order::before {
+      content: '';
+      position: absolute; top: -80px; right: -80px;
+      width: 320px; height: 320px; border-radius: 50%;
+      background: rgba(255,255,255,.06);
+    }
+    #order::after {
+      content: '';
+      position: absolute; bottom: -60px; left: -60px;
+      width: 240px; height: 240px; border-radius: 50%;
+      background: rgba(255,255,255,.04);
+    }
+    #order .section-title { color: white; }
+    #order .section-sub   { color: rgba(255,255,255,.8); }
+    .order-grid {
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      gap: 60px; align-items: start;
+      position: relative; z-index: 1;
+    }
+    .order-info h2 { color: white; margin-bottom: 16px; font-size: clamp(1.8rem, 3vw, 2.4rem); }
+    .order-info p  { color: rgba(255,255,255,.85); margin-bottom: 28px; font-size: 1.05rem; }
+    .order-features { display: flex; flex-direction: column; gap: 16px; }
+    .order-feature { display: flex; align-items: center; gap: 14px; }
+    .order-feature-icon {
+      width: 44px; height: 44px; flex-shrink: 0; border-radius: 50%;
+      background: rgba(255,255,255,.15);
+      display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+    }
+    .order-feature-text h4 { color: white; font-family: 'Lato',sans-serif; font-weight: 700; font-size: .95rem; }
+    .order-feature-text p  { color: rgba(255,255,255,.7); font-size: .85rem; }
+
+    /* FORM */
+    .order-form-card {
+      background: white; border-radius: 20px;
+      padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,.2);
+    }
+    .order-form-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; margin-bottom: 8px; color: var(--text-dark);
+    }
+    .order-form-card .form-sub { color: var(--text-light); font-size: .9rem; margin-bottom: 28px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label {
+      display: block; margin-bottom: 6px;
+      font-size: .85rem; font-weight: 700;
+      color: var(--text-mid); text-transform: uppercase; letter-spacing: .4px;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%; padding: 12px 16px;
+      background: var(--beige-light);
+      border: 1.5px solid var(--beige-dark);
+      border-radius: 10px; color: var(--text-dark);
+      font-family: 'Lato', sans-serif; font-size: .95rem;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--ladybug-red);
+      box-shadow: 0 0 0 3px rgba(200,48,74,.12);
+    }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-group select option { color: var(--text-dark); }
+    .form-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--ladybug-red), var(--ladybug-dk));
+      color: white; border: none; border-radius: 50px;
+      padding: 15px 32px; cursor: pointer;
+      font-family: 'Lato', sans-serif; font-weight: 700; font-size: 1rem;
+      letter-spacing: .5px; transition: var(--transition);
+      box-shadow: 0 4px 20px rgba(200,48,74,.35);
+    }
+    .form-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(200,48,74,.45); }
+    .form-note { text-align: center; margin-top: 14px; font-size: .82rem; color: var(--text-light); }
+
+    /* ── FORMSPREE FEEDBACK ─────────────────────── */
+    [data-fs-success] {
+      display: none;
+      background: #f0fdf4;
+      border: 1.5px solid #86efac;
+      border-radius: 12px;
+      padding: 20px 24px;
+      text-align: center;
+      color: #166534;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+    [data-fs-error] {
+      display: none;
+      background: var(--pink-pale);
+      border: 1.5px solid var(--ladybug-red);
+      border-radius: 12px;
+      padding: 16px 20px;
+      color: var(--ladybug-dk);
+      font-size: .88rem;
+      margin-bottom: 16px;
+    }
+
+    /* delivery options */
+    .delivery-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .delivery-option {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 16px; border-radius: 10px;
+      border: 2px solid var(--beige-dark);
+      background: var(--beige-light);
+      cursor: pointer; transition: var(--transition);
+    }
+    .delivery-option:has(input:checked) { border-color: var(--ladybug-red); background: #FEF0F3; }
+    .delivery-option input[type="radio"] { display: none; }
+    .delivery-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .delivery-option strong { display: block; font-size: .92rem; color: var(--text-dark); }
+    .delivery-option p { font-size: .78rem; color: var(--text-light); margin: 0; }
+
+    /* ── FOOTER ─────────────────────────────────── */
+    footer {
+      background: var(--text-dark);
+      color: rgba(255,255,255,.7);
+      padding: 60px 0 30px;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px; margin-bottom: 48px;
+    }
+    .footer-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; color: white; margin-bottom: 16px;
+    }
+    .footer-brand p { font-size: .9rem; line-height: 1.7; max-width: 280px; }
+    footer h4 { font-family: 'Playfair Display', serif; color: white; font-size: 1rem; margin-bottom: 16px; }
+    .footer-links li { margin-bottom: 10px; }
+    .footer-links a { font-size: .9rem; transition: color var(--transition); }
+    .footer-links a:hover { color: var(--pink-light); }
+    .social-links { display: flex; gap: 12px; margin-top: 20px; }
+    .social-link {
+      width: 38px; height: 38px; background: rgba(255,255,255,.1);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; transition: background var(--transition);
+    }
+    .social-link:hover { background: var(--ladybug-red); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: .85rem;
+    }
+
+    /* ── LIGHTBOX ───────────────────────────────── */
+    #lightbox {
+      position: fixed; inset: 0; z-index: 3000;
+      background: rgba(0,0,0,.9);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity var(--transition);
+    }
+    #lightbox.open { opacity: 1; pointer-events: all; }
+    #lightbox img { max-width: 90vw; max-height: 90vh; border-radius: 8px; }
+    #lightbox-close {
+      position: absolute; top: 24px; right: 24px;
+      background: none; border: none; color: white; font-size: 2rem; cursor: pointer;
+    }
+
+    /* ── TOAST ──────────────────────────────────── */
+    #toast {
+      position: fixed; bottom: 30px; left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--text-dark); color: white;
+      padding: 14px 28px; border-radius: 50px;
+      font-weight: 700; font-size: .9rem;
+      z-index: 4000; transition: transform .35s cubic-bezier(.4,0,.2,1);
+      pointer-events: none; white-space: nowrap;
+    }
+    #toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ── RESPONSIVE ─────────────────────────────── */
+    @media (max-width: 960px) {
+      .hero-grid, .about-grid, .order-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero-image-col { order: -1; }
+      .hero-frame { width: 300px; height: 340px; }
+      .features-grid, .steps-grid { grid-template-columns: 1fr 1fr; }
+      .steps-grid::before { display: none; }
+      .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+      .gallery-item:nth-child(1) { grid-column: span 2; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: span 2; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+    @media (max-width: 600px) {
+      .section { padding: 56px 0; }
+      .features-grid, .steps-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-brand { grid-column: span 1; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      .about-stats { gap: 16px; }
+      .form-row { grid-template-columns: 1fr; }
+      .order-form-card { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════════ -->
+<nav id="navbar">
+  <div class="container nav-inner">
+    <a href="#hero" class="nav-logo">
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="17" cy="20" r="13" fill="#C8304A"/>
+        <rect x="16" y="8" width="2" height="24" rx="1" fill="#2C1810"/>
+        <circle cx="11" cy="16" r="3.2" fill="#2C1810"/>
+        <circle cx="23" cy="16" r="3.2" fill="#2C1810"/>
+        <circle cx="11" cy="24" r="2.5" fill="#2C1810"/>
+        <circle cx="23" cy="24" r="2.5" fill="#2C1810"/>
+        <ellipse cx="17" cy="9" rx="5" ry="3.5" fill="#2C1810"/>
+        <line x1="14" y1="7" x2="11" y2="3" stroke="#2C1810" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="20" y1="7" x2="23" y2="3" stroke="#2C1810" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="11" cy="2.5" r="1.2" fill="#2C1810"/>
+        <circle cx="23" cy="2.5" r="1.2" fill="#2C1810"/>
+      </svg>
+      Ladybug Stitch Co.
+    </a>
+    <ul class="nav-links">
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#order" class="nav-cta">Order Now</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div id="mobile-nav">
+    <a href="#gallery"      onclick="toggleMobileNav()">Gallery</a>
+    <a href="#about"        onclick="toggleMobileNav()">About</a>
+    <a href="#how-it-works" onclick="toggleMobileNav()">How It Works</a>
+    <a href="#order"        onclick="toggleMobileNav()">Order Now</a>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════ -->
+<section id="hero">
+  <svg class="hero-bg-dots" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="80"  cy="120" r="40" fill="#F9D1DA" opacity=".4"/>
+    <circle cx="1120" cy="80" r="60" fill="#F9D1DA" opacity=".3"/>
+    <circle cx="950" cy="580" r="90" fill="#F2E8DC" opacity=".5"/>
+    <circle cx="200" cy="600" r="50" fill="#F9D1DA" opacity=".3"/>
+    <circle cx="1050" cy="300" r="20" fill="#C8304A" opacity=".08"/>
+  </svg>
+
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <div class="hero-badge">
+        🐞 &nbsp;All Pieces Made to Order
+      </div>
+      <h1 class="hero-title">
+        Embroidery <em>Stitched<br>Just for You</em>
+      </h1>
+      <p class="hero-sub">
+        Every piece from Ladybug Stitch Co. is completely custom — designed around
+        your vision, your colors, and your story. No two pieces are ever the same.
+      </p>
+      <div class="hero-btns">
+        <a href="#order" class="btn btn-primary">Start Your Order</a>
+        <a href="#gallery" class="btn-outline-red">See Our Work</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     FEATURES BAR
+══════════════════════════════════════════════ -->
+<section id="features">
+  <div class="container">
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-icon">🪡</div>
+        <div>
+          <h4>100% Custom</h4>
+          <p>Every piece made to your vision</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🎨</div>
+        <div>
+          <h4>Your Colors, Your Design</h4>
+          <p>Fully personalized from start to finish</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">📦</div>
+        <div>
+          <h4>Shipping & Local Pickup</h4>
+          <p>We ship or you can pick up locally</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">💕</div>
+        <div>
+          <h4>Made with Love</h4>
+          <p>Passion stitched into every piece</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     GALLERY
+══════════════════════════════════════════════ -->
+<section id="gallery" class="section">
+  <div class="container">
+    <div class="center gallery-intro">
+      <h2 class="section-title">Our Work</h2>
+      <p class="section-sub">Every piece below was a custom order — here's what we can create for you.</p>
+    </div>
+    <div class="gallery-grid" id="gallery-grid"></div>
+    <div class="gallery-cta">
+      <a href="#order" class="btn btn-primary">Request Your Custom Piece</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     ABOUT
+══════════════════════════════════════════════ -->
+<section id="about" class="section">
+  <div class="container about-grid">
+    <div class="about-image">
+      <img src="images/aboutme1.jpg" alt="Ladybug Stitch Co. — the maker behind the stitches">
+    </div>
+    <div class="about-content">
+      <h2 class="section-title">A Little About Us 🐞</h2>
+      <p>
+        Ladybug Stitch Co. was born out of a deep love for handcraft and the belief that
+        the most meaningful things are made by hand. Every order is personal — we work
+        directly with you to bring your idea to life.
+      </p>
+      <p>
+        Whether it's a wedding gift, a nursery piece, a pet portrait, or a personalized
+        keepsake — if you can dream it, we can stitch it.
+      </p>
+      <div class="about-stats">
+        <div class="stat">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Happy Customers</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">❤️</div>
+          <div class="stat-label">Made with Love</div>
+        </div>
+      </div>
+      <a href="#order" class="btn btn-primary">Request a Custom Piece</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     HOW IT WORKS
+══════════════════════════════════════════════ -->
+<section id="how-it-works" class="section">
+  <div class="container">
+    <div class="center">
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-sub" style="max-width:500px;margin-left:auto;margin-right:auto">
+        Getting your custom piece is simple — just four easy steps.
+      </p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-circle">1</div>
+        <h4>Share Your Idea</h4>
+        <p>Fill out the order form with your vision, colors, size, and any reference images.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-circle">2</div>
+        <h4>Get Your Quote</h4>
+        <p>We'll reply within 48 hours with a price, timeline, and design confirmation.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-circle">3</div>
+        <h4>We Stitch It</h4>
+        <p>Your piece is handcrafted with care. We'll send you a preview before shipping.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-circle">4</div>
+        <h4>It Arrives at Your Door</h4>
+        <p>Beautifully packaged and ready to display, gift, or treasure forever.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     ORDER FORM
+══════════════════════════════════════════════ -->
+<section id="order" class="section">
+  <div class="container order-grid">
+    <div class="order-info">
+      <h2 class="section-title">Let's Create<br><em style="font-style:italic">Something Beautiful</em></h2>
+      <p>Tell us about your idea and we'll get back to you within 48 hours with a quote and timeline.</p>
+      <div class="order-features">
+        <div class="order-feature">
+          <div class="order-feature-icon">🪡</div>
+          <div class="order-feature-text">
+            <h4>Fully Custom Designs</h4>
+            <p>No templates — every piece is original</p>
+          </div>
+        </div>
+        <div class="order-feature">
+          <div class="order-feature-icon">📦</div>
+          <div class="order-feature-text">
+            <h4>Shipping & Local Pickup</h4>
+            <p>We ship to your door or arrange local pickup</p>
+          </div>
+        </div>
+        <div class="order-feature">
+          <div class="order-feature-icon">📸</div>
+          <div class="order-feature-text">
+            <h4>Preview Before Shipping</h4>
+            <p>We'll show you the finished piece first</p>
+          </div>
+        </div>
+        <div class="order-feature">
+          <div class="order-feature-icon">💌</div>
+          <div class="order-feature-text">
+            <h4>Reply Within 24 Hours</h4>
+            <p>Quick, friendly responses every time</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="order-form-card">
+      <h3>Request a Custom Piece</h3>
+      <p class="form-sub">Fill in the details below and we'll be in touch soon 🐞</p>
+      <div data-fs-success>🐞 Your request has been sent! We'll be in touch within 24 hours.</div>
+      <div data-fs-error></div>
+      <form id="order-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" name="first-name" placeholder="Jane" required data-fs-field />
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" name="last-name" placeholder="Smith" required data-fs-field />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" name="email" placeholder="jane@example.com" required data-fs-field />
+        </div>
+        <div class="form-group">
+          <label>Type of Piece</label>
+          <select name="piece-type">
+            <option value="">— Select one —</option>
+            <option>Pet Ear Portrait</option>
+            <option>Floral / Botanical Sashes</option>
+            <option>Personalized Name / Monogram</option>
+            <option>Wedding / Anniversary Gift</option>
+            <option>Baby / Nursery Piece</option>
+            <option>Clothing / Wearable</option>
+            <option>Home Décor</option>
+            <option>Other / Surprise Me</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Budget Range</label>
+          <select name="budget">
+            <option value="">— Select —</option>
+            <option>Under $30</option>
+            <option>$30 – $60</option>
+            <option>$60 – $100</option>
+            <option>$100+</option>
+            <option>Flexible</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Delivery Preference</label>
+          <div class="delivery-options">
+            <label class="delivery-option" id="opt-shipping">
+              <input type="radio" name="delivery" value="shipping" checked onchange="toggleDelivery(this)" />
+              <span class="delivery-icon">📦</span>
+              <div>
+                <strong>Ship to Me</strong>
+                <p>We'll ship directly to your address</p>
+              </div>
+            </label>
+            <label class="delivery-option" id="opt-pickup">
+              <input type="radio" name="delivery" value="pickup" onchange="toggleDelivery(this)" />
+              <span class="delivery-icon">🤝</span>
+              <div>
+                <strong>Local Pickup</strong>
+                <p>Pick up at a convenient location</p>
+              </div>
+            </label>
+          </div>
+        </div>
+        <div class="form-group" id="shipping-address-group">
+          <label>Shipping Address</label>
+          <input type="text" id="shipping-address" name="shipping-address" placeholder="Street address, City, State, ZIP" />
+        </div>
+        <div class="form-group">
+          <label>Tell Us About Your Idea</label>
+          <textarea name="message" placeholder="Colors, theme, occasion, any reference images or inspiration you have in mind..." required data-fs-field></textarea>
+        </div>
+        <button type="submit" class="form-submit" data-fs-submit-btn>Send My Request 🐞</button>
+        <p class="form-note">We'll reply within 24 hours. No commitment required.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <svg width="28" height="28" viewBox="0 0 34 34" fill="none">
+            <circle cx="17" cy="20" r="13" fill="#C8304A"/>
+            <rect x="16" y="8" width="2" height="24" rx="1" fill="#2C1810"/>
+            <circle cx="11" cy="16" r="3.2" fill="#2C1810"/>
+            <circle cx="23" cy="16" r="3.2" fill="#2C1810"/>
+            <circle cx="11" cy="24" r="2.5" fill="#2C1810"/>
+            <circle cx="23" cy="24" r="2.5" fill="#2C1810"/>
+            <ellipse cx="17" cy="9" rx="5" ry="3.5" fill="#2C1810"/>
+          </svg>
+          Ladybug Stitch Co.
+        </div>
+        <p>Custom embroidery made with love. Every stitch tells your story.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" title="Instagram">📷</a>
+          <a href="#" class="social-link" title="Facebook">📘</a>
+          <a href="#" class="social-link" title="Pinterest">📌</a>
+          <a href="#" class="social-link" title="Etsy">🛍️</a>
+        </div>
+      </div>
+      <div>
+        <h4>Navigate</h4>
+        <ul class="footer-links">
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#order">Request an Order</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in Touch</h4>
+        <ul class="footer-links">
+          <li><a href="mailto:Kimberly.l.quiroz@gmail.com">Kimberly.l.quiroz@gmail.com</a></li>
+          <li><a href="#">Turnaround Times</a></li>
+          <li><a href="#">Care Instructions</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Ladybug Stitch Co. All rights reserved.</span>
+      <span>Made with 🐞 &amp; ❤️</span>
+    </div>
+  </div>
+</footer>
+
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <button id="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="" />
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+
+<script>
+// ── GALLERY ───────────────────────────────────────────────────────────────────
+const GALLERY = [
+  { image: 'images/Tote1.jpg',    alt: "Custom embroidered tote bag" },
+  { image: 'images/sash1.jpg',    alt: "Embroidered sash" },
+  { image: 'images/sash2.jpg',    alt: "Embroidered sash detail" },
+  { image: 'images/Shirt1.jpg',   alt: "Custom embroidered shirt" },
+  { image: 'images/towels1.png',  alt: "Personalized embroidered towels" },
+  { image: 'images/baby1.jpg',    alt: "Custom baby embroidery" },
+  { image: 'images/bunny1.jpg',   alt: "Embroidered bunny keepsake" },
+  { image: 'images/tag1.jpg',     alt: "Embroidered gift tag" },
+  { image: 'images/tag2.jpg',     alt: "Custom embroidery piece" },
+  { image: 'images/towel2.jpg',   alt: "Custom embroidery piece" },
+];
+
+function renderGallery() {
+  const grid = document.getElementById('gallery-grid');
+  grid.innerHTML = GALLERY.map((g, i) => `
+    <div class="gallery-item" onclick="openLightbox('${g.image}', '${g.alt}')">
+      <img src="${g.image}" alt="${g.alt}" loading="lazy">
+      <div class="gallery-overlay">🔍</div>
+    </div>
+  `).join('');
+}
+
+// ── LIGHTBOX ──────────────────────────────────────────────────────────────────
+function openLightbox(src, alt) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox-img').alt = alt;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('lightbox').addEventListener('click', e => {
+  if (e.target === document.getElementById('lightbox')) closeLightbox();
+});
+
+// ── TOAST ─────────────────────────────────────────────────────────────────────
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ── MOBILE NAV ────────────────────────────────────────────────────────────────
+function toggleMobileNav() {
+  document.getElementById('mobile-nav').classList.toggle('open');
+}
+
+// ── NAVBAR SCROLL ─────────────────────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
+});
+
+// ── ORDER FORM (Formspree) ────────────────────────────────────────────────────
+// Watch for Formspree success and show toast alongside the inline message
+const fsSuccessEl = document.querySelector('[data-fs-success]');
+if (fsSuccessEl) {
+  new MutationObserver(() => {
+    if (fsSuccessEl.style.display !== 'none' && fsSuccessEl.offsetParent !== null) {
+      showToast("🐞 Request received! We'll be in touch within 24 hours.");
+    }
+  }).observe(fsSuccessEl, { attributes: true, attributeFilter: ['style'] });
+}
+
+window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+formspree('initForm', { formElement: '#order-form', formId: 'xaqagonr' });
+
+// ── DELIVERY TOGGLE ───────────────────────────────────────────────────────────
+function toggleDelivery(radio) {
+  const addrGroup = document.getElementById('shipping-address-group');
+  const addrInput = document.getElementById('shipping-address');
+  if (radio.value === 'shipping') {
+    addrGroup.style.display = 'block';
+    addrInput.required = true;
+  } else {
+    addrGroup.style.display = 'none';
+    addrInput.required = false;
+    addrInput.value = '';
+  }
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+renderGallery();
+</script>
+
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+</body>
+</html>
