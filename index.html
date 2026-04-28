@@ -256,12 +256,12 @@
       background: linear-gradient(135deg, var(--pink-pale) 0%, var(--beige) 100%);
     }
     .about-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 60px; align-items: center;
+      display: grid; grid-template-columns: 1fr 1.4fr 1fr;
+      gap: 40px; align-items: center;
     }
     .about-image {
-      border-radius: 200px 200px 120px 120px; overflow: hidden;
-      height: 460px; background: var(--pink-light);
+      border-radius: 160px 160px 100px 100px; overflow: hidden;
+      height: 360px; background: var(--pink-light);
       box-shadow: var(--shadow);
       display: flex; align-items: center; justify-content: center;
     }
@@ -491,7 +491,7 @@
 
     /* ── RESPONSIVE ─────────────────────────────── */
     @media (max-width: 960px) {
-      .hero-grid, .about-grid, .order-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero-grid, .about-grid, .order-grid { grid-template-columns: 1fr; gap: 32px; }
       .hero-image-col { order: -1; }
       .hero-frame { width: 300px; height: 340px; }
       .features-grid, .steps-grid { grid-template-columns: 1fr 1fr; }
@@ -657,6 +657,7 @@
       <img src="images/aboutme1.jpg" alt="Ladybug Stitch Co. — the maker behind the stitches">
     </div>
     <div class="about-content">
+
       <h2 class="section-title">A Little About Us 🐞</h2>
       <p>
         Ladybug Stitch Co. was born out of a deep love for handcraft and the belief that
@@ -678,6 +679,9 @@
         </div>
       </div>
       <a href="#order" class="btn btn-primary">Request a Custom Piece</a>
+    </div>
+    <div class="about-image">
+      <img src="images/aboutme3.jpg" alt="Ladybug Stitch Co. — handcrafted with love">
     </div>
   </div>
 </section>
