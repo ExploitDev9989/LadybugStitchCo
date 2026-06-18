@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Ladybug Stitch Co. Contact Card</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --pink-pale: #FEF0F3;
+      --pink-light: #F9D1DA;
+      --beige-light: #FDF8F3;
+      --beige: #F2E8DC;
+      --beige-dark: #DECCB8;
+      --ladybug-red: #C8304A;
+      --ladybug-dk: #8B1A2A;
+      --spot: #2C1810;
+      --text-dark: #3D2315;
+      --text-mid: #6B4535;
+      --white: #FFFFFF;
+      --shadow: 0 22px 70px rgba(61, 35, 21, .18);
+      --transition: .3s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      font-family: 'Lato', sans-serif;
+      color: var(--text-dark);
+      background:
+        radial-gradient(circle at 12% 16%, rgba(249, 209, 218, .78), transparent 24%),
+        radial-gradient(circle at 86% 12%, rgba(242, 232, 220, .9), transparent 28%),
+        linear-gradient(135deg, var(--pink-pale) 0%, var(--beige-light) 56%, var(--beige) 100%);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 18px;
+    }
+
+    .business-card {
+      position: relative;
+      width: min(100%, 760px);
+      min-height: 430px;
+      display: grid;
+      grid-template-columns: .88fr 1.12fr;
+      overflow: hidden;
+      background: rgba(255, 255, 255, .84);
+      border: 1px solid rgba(222, 204, 184, .72);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .brand-panel {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 28px;
+      padding: 38px 34px;
+      color: var(--white);
+      background:
+        linear-gradient(145deg, rgba(139, 26, 42, .96), rgba(200, 48, 74, .92)),
+        var(--ladybug-red);
+    }
+
+    .brand-panel::before,
+    .brand-panel::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .11);
+      pointer-events: none;
+    }
+
+    .brand-panel::before {
+      width: 210px;
+      height: 210px;
+      top: -90px;
+      right: -84px;
+    }
+
+    .brand-panel::after {
+      width: 150px;
+      height: 150px;
+      bottom: -54px;
+      left: -56px;
+    }
+
+    .brand-lockup,
+    .brand-note {
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo-mark {
+      width: 88px;
+      height: 88px;
+      margin-bottom: 18px;
+      display: block;
+      filter: drop-shadow(0 8px 14px rgba(44, 24, 16, .2));
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.25rem, 7vw, 3.15rem);
+      line-height: 1.12;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .intro {
+      color: rgba(255, 255, 255, .84);
+      font-size: 1.02rem;
+      font-weight: 300;
+      max-width: 260px;
+    }
+
+    .brand-note {
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .72);
+    }
+
+    .contact-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px 34px;
+    }
+
+    .card-kicker {
+      color: var(--ladybug-red);
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--text-dark);
+      font-size: clamp(1.55rem, 4vw, 2.2rem);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .contact-copy {
+      color: var(--text-mid);
+      margin-bottom: 24px;
+      max-width: 330px;
+    }
+
+    .links {
+      display: grid;
+      gap: 11px;
+    }
+
+    .link-button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      min-height: 58px;
+      width: 100%;
+      border-radius: 14px;
+      background: var(--white);
+      border: 1.5px solid var(--beige-dark);
+      color: var(--text-dark);
+      padding: 13px 16px;
+      font-weight: 700;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+
+    .link-button:hover,
+    .link-button:focus-visible {
+      border-color: var(--ladybug-red);
+      box-shadow: 0 8px 22px rgba(200, 48, 74, .18);
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .link-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .link-icon {
+      width: 38px;
+      height: 38px;
+      flex: 0 0 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: var(--pink-light);
+      color: var(--ladybug-dk);
+      font-size: .72rem;
+      letter-spacing: .3px;
+    }
+
+    .arrow {
+      color: var(--ladybug-red);
+      font-size: 1rem;
+      flex: 0 0 auto;
+    }
+
+    .primary {
+      background: linear-gradient(135deg, var(--ladybug-red), var(--ladybug-dk));
+      border-color: transparent;
+      color: var(--white);
+      box-shadow: 0 8px 24px rgba(200, 48, 74, .25);
+    }
+
+    .primary .link-icon {
+      background: rgba(255, 255, 255, .18);
+      color: var(--white);
+    }
+
+    .primary .arrow { color: var(--white); }
+
+    @media (max-width: 720px) {
+      .page {
+        align-items: flex-start;
+        padding: 18px 12px;
+      }
+
+      .business-card {
+        min-height: 0;
+        grid-template-columns: 1fr;
+        border-radius: 18px;
+      }
+
+      .brand-panel {
+        min-height: 250px;
+        padding: 30px 24px;
+      }
+
+      .logo-mark {
+        width: 78px;
+        height: 78px;
+      }
+
+      .intro {
+        max-width: 300px;
+      }
+
+      .contact-panel {
+        padding: 28px 18px 20px;
+      }
+
+      .link-button {
+        min-height: 54px;
+        border-radius: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="business-card" aria-labelledby="page-title">
+      <div class="brand-panel">
+        <div class="brand-lockup">
+          <svg class="logo-mark" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+            <path d="M14 13 C12 8, 8 6, 5 5" stroke="#2C1810" stroke-width="2" stroke-linecap="round"/>
+            <path d="M30 13 C32 8, 36 6, 39 5" stroke="#2C1810" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="5" cy="5" r="2" fill="#2C1810"/>
+            <circle cx="39" cy="5" r="2" fill="#2C1810"/>
+            <path d="M12 23 H5" stroke="#2C1810" stroke-width="2" stroke-linecap="round"/>
+            <path d="M12 29 L5 32" stroke="#2C1810" stroke-width="2" stroke-linecap="round"/>
+            <path d="M14 35 L8 40" stroke="#2C1810" stroke-width="2" stroke-linecap="round"/>
+            <path d="M32 23 H39" stroke="#2C1810" stroke-width="2" stroke-linecap="round"/>
+            <path d="M32 29 L39 32" stroke="#2C1810" stroke-width="2" stroke-linecap="round"/>
+            <path d="M30 35 L36 40" stroke="#2C1810" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="22" cy="26" r="15" fill="#C8304A"/>
+            <rect x="21" y="12" width="2" height="29" rx="1" fill="#2C1810"/>
+            <circle cx="15" cy="22" r="3.4" fill="#2C1810"/>
+            <circle cx="29" cy="22" r="3.4" fill="#2C1810"/>
+            <circle cx="15" cy="31" r="2.8" fill="#2C1810"/>
+            <circle cx="29" cy="31" r="2.8" fill="#2C1810"/>
+            <ellipse cx="22" cy="12" rx="6" ry="4" fill="#2C1810"/>
+          </svg>
+
+          <h1 id="page-title">Ladybug Stitch Co.</h1>
+          <p class="intro">Custom embroidery, keepsakes, and handmade gifts stitched with care.</p>
+        </div>
+        <p class="brand-note">Scan. Tap. Connect.</p>
+      </div>
+
+      <div class="contact-panel">
+        <p class="card-kicker">Digital Business Card</p>
+        <h2>Follow Ladybug Stitch Co.</h2>
+        <p class="contact-copy">Tap below to visit our socials, call us, or return to the main website.</p>
+
+        <div class="links" aria-label="Ladybug Stitch Co. contact links">
+          <a class="link-button" href="https://www.facebook.com/profile.php?id=61590687242471" rel="nofollow noopener" target="_blank">
+            <span class="link-label"><span class="link-icon">FB</span>Facebook</span>
+            <span class="arrow" aria-hidden="true">&gt;</span>
+          </a>
+          <a class="link-button" href="https://www.instagram.com/ladybug_stitchco/" rel="nofollow noopener" target="_blank">
+            <span class="link-label"><span class="link-icon">IG</span>Instagram</span>
+            <span class="arrow" aria-hidden="true">&gt;</span>
+          </a>
+          <a class="link-button primary" href="tel:+14784442405">
+            <span class="link-label"><span class="link-icon">TEL</span>478-444-2405</span>
+            <span class="arrow" aria-hidden="true">&gt;</span>
+          </a>
+          <a class="link-button" href="https://www.ladybugstitch.com/" rel="nofollow noopener" target="_blank">
+            <span class="link-label"><span class="link-icon">WEB</span>Main Website</span>
+            <span class="arrow" aria-hidden="true">&gt;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
