@@ -1,0 +1,21 @@
+/* Display the supplied square artwork without its excess top/bottom space. */
+.header-logo {
+  position: relative;
+  display: block;
+  width: 132px;
+  height: 64px;
+  overflow: hidden;
+  flex: 0 0 132px;
+}
+.header-logo img {
+  position: absolute;
+  top: -29px;
+  left: 0;
+  width: 132px;
+  height: 132px;
+  max-width: none;
+}
+.header-logo:focus-visible {
+  outline: 2px solid #C8304A;
+  outline-offset: 3px;
+}
