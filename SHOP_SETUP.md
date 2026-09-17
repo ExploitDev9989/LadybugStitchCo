@@ -10,10 +10,20 @@ The owner requested both shipping and pickup, with shipping **starting at $7.99*
 
 ## Your wife's everyday workflow
 
+The first collection is limited to these product categories and sizes:
+
+| Square category | Sizes |
+| --- | --- |
+| `Sweatshirts` | Small, Medium, Large, XL, 2XL |
+| `Tote bags` | Small, Large |
+| `Makeup pouches` | Small, Large |
+
+Admin sign-in and on-site photo editing are deferred at the owner's request. Update catalog details and photos in Square for now. Products without a photo show a neutral “Photo coming soon” placeholder. The local design preview has exactly these three product types, with sample prices and quantities clearly labeled; those listings are not published or added to Square.
+
 1. Sign into the same Square account used at markets and open the Item Library.
 2. Create a category named **Website Shop**. Add only ready-made products that should be offered on this website to that category. Existing market-only items stay private to Square.
-3. For each product, add a name, description, photo and fixed price. Create variations for sizes/colors and enter stock for each variation at the selected market location. Enable inventory tracking. Items with variable prices, untracked stock, required modifiers, or fractional units are not supported by this ready-made shop.
-4. Optionally add categories such as **Halloween**, **Christmas**, or **Everyday favorites**. They become filters in the shop. Keep the **Website Shop** category on every item you want displayed.
+3. Also assign each product to **Sweatshirts**, **Tote bags**, or **Makeup pouches**. Create the size variations in the table above. The site also recognizes S, M, L, X-Large, and XXL and displays them as the matching standard sizes. Other product types and sizes stay off the website.
+4. Add a name, description, fixed price and stock for each variation at the selected market location, and enable inventory tracking. Add your photos when ready. Seasonal designs can be separate items (for example, Halloween sweatshirt and Christmas sweatshirt) within the Sweatshirts category. Items with variable prices, untracked stock, modifiers, or fractional units are not supported by this ready-made shop.
 5. Save in Square and refresh the Shop page. A zero-stock size is shown as sold out. Remove the Website Shop category to stop displaying a product online, or archive it.
 6. Continue using the same item variations and location for market sales. The website reads stock from that location; it does not create a second inventory list.
 

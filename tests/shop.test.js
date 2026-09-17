@@ -10,7 +10,7 @@ const savedEnv = { ...process.env };
 const originalFetch = global.fetch;
 const item = (id = 'ITEM', extra = {}) => ({
   type: 'ITEM', id, present_at_all_locations: true,
-  item_data: { name: 'Embroidered sweater', product_type: 'REGULAR', categories: [{ id: 'SHOP' }, { id: 'SEASON' }],
+  item_data: { name: 'Embroidered sweater', product_type: 'REGULAR', categories: [{ id: 'SHOP' }, { id: 'SEASON' }, { id: 'TYPE' }],
     image_ids: ['IMAGE'], variations: [{ id: `${id}-SMALL`, type: 'ITEM_VARIATION', present_at_all_locations: true,
       item_variation_data: { name: 'Small', pricing_type: 'FIXED_PRICING', price_money: { amount: 3500, currency: 'USD' }, track_inventory: true } }], ...extra }
 });
@@ -22,7 +22,8 @@ beforeEach(() => {
     SHOP_CURRENCY: 'USD', SHOP_SHIPPING_FEE_CENTS: '799', SHOP_SHIPPING_DESCRIPTION: 'Test shipping instructions', SHOP_PICKUP_INSTRUCTIONS: 'Test pickup instructions' });
   objects = [ { type: 'CATEGORY', id: 'SHOP', category_data: { name: 'Website Shop' } },
     { type: 'CATEGORY', id: 'SEASON', category_data: { name: 'Christmas' } },
-    { type: 'IMAGE', id: 'IMAGE', image_data: { url: 'https://images.example.test/sweater.jpg' } }, item() ];
+    { type: 'IMAGE', id: 'IMAGE', image_data: { url: 'https://images.example.test/sweater.jpg' } }, item(),
+    { type: 'CATEGORY', id: 'TYPE', category_data: { name: 'Sweatshirts' } } ];
   counts = [{ catalog_object_id: 'ITEM-SMALL', location_id: 'LOCATION', state: 'IN_STOCK', quantity: '3' }];
   requests = []; customReply = undefined;
   global.fetch = async (url, options) => {
@@ -47,7 +48,7 @@ test('catalog exposes only opted-in ready-made inventory at the configured locat
   const products = await loadCatalog(config());
   assert.equal(products.length, 1);
   assert.equal(products[0].variants[0].stock, 3);
-  assert.deepEqual(products[0].categories, ['Christmas']);
+  assert.deepEqual(products[0].categories, ['Sweatshirts']);
   assert.equal(products[0].image, 'https://images.example.test/sweater.jpg');
   assert.ok(!JSON.stringify(products).includes('TEST_ONLY_TOKEN'));
 });
@@ -174,4 +175,21 @@ test('Azure routes remain unique after trailing-slash normalization', () => {
   const normalized = routing.routes.map(rule => rule.route.replace(/\/+$/, '').toLowerCase());
   assert.equal(new Set(normalized).size, normalized.length);
   assert.equal(routing.routes.find(rule => rule.route === '/shop').rewrite, '/shop.html');
+});
+
+test('only the three requested product types and their sizes are sold online', async () => {
+  const { PRODUCT_TYPES, productType, sizeName } = require('../api/shared/product-types');
+  assert.deepEqual(PRODUCT_TYPES.map(t => t.name), ['Sweatshirts', 'Tote bags', 'Makeup pouches']);
+  assert.deepEqual(PRODUCT_TYPES[0].sizes, ['Small', 'Medium', 'Large', 'XL', '2XL']);
+  assert.equal(sizeName('XXL', PRODUCT_TYPES[0]), '2XL');
+  assert.equal(sizeName('extra-large', PRODUCT_TYPES[0]), 'XL');
+  assert.equal(sizeName('Medium', PRODUCT_TYPES[1]), null);
+  assert.equal(productType(['Tote Bags']).name, 'Tote bags');
+  const nonShopType = item('TOWEL', { categories: [{ id: 'SHOP' }] }); objects.push(nonShopType);
+  objects[3].item_data.variations.push({ id: 'ITEM-3XL', type: 'ITEM_VARIATION', present_at_all_locations: true,
+    item_variation_data: { name: '3XL', pricing_type: 'FIXED_PRICING', price_money: { amount: 3500, currency: 'USD' }, track_inventory: true } });
+  const products = await loadCatalog(config());
+  assert.equal(products.length, 1);
+  assert.deepEqual(products[0].variants.map(v => v.name), ['Small']);
+  await assert.rejects(checkout(config(), cart({ items: [{ id: 'ITEM-3XL', quantity: 1, expectedPrice: 3500 }] })), { status: 409 });
 });

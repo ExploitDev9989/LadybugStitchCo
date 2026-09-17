@@ -1,5 +1,6 @@
 'use strict';
 const { createHash } = require('node:crypto');
+const { PRODUCT_TYPES, productType, sizeName } = require('./product-types');
 
 class ShopError extends Error {
   constructor(status, message) { super(message); this.status = status; }
@@ -74,24 +75,28 @@ async function loadCatalog(cfg) {
     if (!data || data.is_archived || !atLocation(item, cfg.locationId) || (data.product_type && data.product_type !== 'REGULAR')) continue;
     const categoryIds = [...(data.categories || []).map(c => c.id), data.category_id].filter(Boolean);
     if (!categoryIds.some(id => allowed.has(id))) continue;
+    const type = productType(categoryIds.map(id => categories.get(id)).filter(Boolean));
+    if (!type) continue;
     // This ready-made shop does not support required personalization/modifiers.
     if ((data.modifier_list_info || []).some(m => m.enabled !== false)) continue;
     const variants = [];
     for (const variant of data.variations || []) {
       const v = variant.item_variation_data;
       if (!v || !atLocation(variant, cfg.locationId) || v.sellable === false || v.measurement_unit_id) continue;
+      const size = sizeName(v.name, type);
+      if (!size) continue;
       const override = v.location_overrides?.find(o => o.location_id === cfg.locationId) || {};
       const money = override.price_money || v.price_money;
       const tracked = override.track_inventory ?? v.track_inventory;
       if ((override.pricing_type || v.pricing_type) !== 'FIXED_PRICING' || !tracked || override.sold_out
         || !Number.isSafeInteger(money?.amount) || money.amount <= 0 || money.currency !== cfg.currency) continue;
-      variants.push({ id: variant.id, name: v.name || 'Regular', price: money.amount, currency: money.currency, stock: 0,
+      variants.push({ id: variant.id, name: size, price: money.amount, currency: money.currency, stock: 0,
         image: (v.image_ids || []).map(id => images.get(id)).find(Boolean) || null });
     }
     if (variants.length) products.push({
       id: item.id, name: data.name || 'Handmade item', description: data.description_plaintext || data.description || '',
       image: (data.image_ids || []).map(id => images.get(id)).find(Boolean) || null,
-      categories: categoryIds.filter(id => !allowed.has(id)).map(id => categories.get(id)).filter(Boolean), variants
+      categories: [type.name], variants: variants.sort((a, b) => type.sizes.indexOf(a.name) - type.sizes.indexOf(b.name))
     });
   }
   const ids = products.flatMap(p => p.variants.map(v => v.id));
@@ -120,6 +125,7 @@ async function loadCatalog(cfg) {
 
 function publicSettings(cfg) {
   return { checkoutEnabled: cfg.ready, currency: cfg.currency, shippingFee: cfg.shippingFee,
+    collections: PRODUCT_TYPES.map(type => type.name),
     shippingDescription: cfg.shippingDescription, pickupInstructions: cfg.pickupInstructions,
     sandbox: cfg.environment === 'sandbox' };
 }

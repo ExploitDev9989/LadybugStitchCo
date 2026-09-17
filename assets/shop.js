@@ -100,7 +100,7 @@
       const card = element('article', 'product-card');
       const photo = element('div', 'product-photo');
       const image = element('img'); image.loading = 'lazy'; image.alt = product.name;
-      const placeholder = element('span', 'photo-placeholder', 'A little handmade happiness');
+      const placeholder = element('span', 'photo-placeholder', 'Photo coming soon');
       const badge = element('span', 'stock-badge');
       photo.append(image, placeholder, badge);
       image.addEventListener('error', () => { image.hidden = true; placeholder.hidden = false; });
@@ -110,7 +110,7 @@
       top.append(element('h3', '', product.name), amount);
       const description = element('p', 'product-description', product.description);
       const actions = element('div', 'product-actions');
-      const label = element('label', 'variant-label', 'Size / option');
+      const label = element('label', 'variant-label', 'Size');
       const select = element('select'); select.setAttribute('aria-label', `Size or option for ${product.name}`);
       for (const variant of product.variants) {
         const option = element('option', '', `${variant.name}${variant.stock ? '' : ' — sold out'}`);
@@ -157,7 +157,7 @@
       $('demo-notice').hidden = !data.preview;
       $('category').replaceChildren(element('option', '', 'All collections'));
       $('category').firstChild.value = '';
-      for (const name of [...new Set(products.flatMap(p => p.categories))].sort()) {
+      for (const name of settings.collections || [...new Set(products.flatMap(p => p.categories))].sort()) {
         const option = element('option', '', name); option.value = name; $('category').append(option);
       }
       renderProducts(); renderBag();

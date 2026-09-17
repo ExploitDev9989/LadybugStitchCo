@@ -3,6 +3,7 @@
 const http = require('node:http');
 const fs = require('node:fs');
 const path = require('node:path');
+const { PRODUCT_TYPES } = require('../api/shared/product-types');
 const root = path.resolve(__dirname, '..');
 const localSettings = path.join(root, 'api/local.settings.json');
 if (fs.existsSync(localSettings)) Object.assign(process.env, JSON.parse(fs.readFileSync(localSettings, 'utf8')).Values);
@@ -11,16 +12,18 @@ const api = { '/api/shop/products': require('../api/products'), '/api/shop/check
 const fixture = {
   preview: true,
   settings: { checkoutEnabled: false, sandbox: true, currency: 'USD', shippingFee: 799,
+    collections: PRODUCT_TYPES.map(type => type.name),
     shippingDescription: 'Shipping starts at $7.99. Delivery area and final rate are awaiting setup.', pickupInstructions: 'Local pickup details will be available before checkout opens.' },
   products: [
-    ['sample-shirt', 'Embroidered tee', 'Shirt1.jpg', 3200, 'Seasonal', 3],
-    ['sample-tote', 'Everyday embroidered tote', 'Tote1.jpg', 2400, 'Everyday favorites', 6],
-    ['sample-towel', 'A little kitchen charm', 'towel2.jpg', 1800, 'Home & gifts', 0],
-    ['sample-baby', 'A keepsake for little ones', 'baby1.jpg', 2200, 'Home & gifts', 2]
-  ].map(([id, name, file, amount, category, stock]) => ({ id, name, description: 'Sample listing for design preview. Actual products and prices come from your Square catalog.',
-    image: `https://www.ladybugstitch.com/images/${file}`, categories: [category],
-    variants: [{ id: `${id}-one`, name: id === 'sample-shirt' ? 'Small' : 'Regular', price: amount, currency: 'USD', stock },
-      ...(id === 'sample-shirt' ? [{ id: `${id}-two`, name: 'Medium', price: amount, currency: 'USD', stock: 2 }] : [])] }))
+    ['sample-sweatshirt', 'Embroidered sweatshirt', 4500, 'Sweatshirts'],
+    ['sample-tote', 'Embroidered tote bag', 2400, 'Tote bags'],
+    ['sample-pouch', 'Embroidered makeup pouch', 1600, 'Makeup pouches']
+  ].map(([id, name, amount, category]) => ({ id, name,
+    description: 'Sample price and stock for preview only. Your own photos, products and prices will come from Square.',
+    image: null, categories: [category],
+    variants: PRODUCT_TYPES.find(type => type.name === category).sizes.map((size, index) => ({
+      id: `${id}-${index}`, name: size, price: amount, currency: 'USD', stock: 3
+    })) }))
 };
 const mime = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.jpg': 'image/jpeg', '.png': 'image/png', '.json': 'application/json' };
 http.createServer(async (req, res) => {
