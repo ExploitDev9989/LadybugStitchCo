@@ -1,0 +1,10 @@
+{
+  "name": "ladybug-stitch-website",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.js",
+    "test": "node --test tests/*.test.js",
+    "preview": "node scripts/preview.js"
+  },
+  "engines": { "node": "22.x" }
+}

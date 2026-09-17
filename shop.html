@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Shop embroidered sweatshirts in Small–2XL, plus small and large tote bags and makeup pouches. Shipping and local pickup from Ladybug Stitch Co.">
+  <title>Shop | Ladybug Stitch Co.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/shop.css">
+  <script src="/assets/shop.js" defer></script>
+  <link rel="stylesheet" href="/assets/logo.css">
+</head>
+<body>
+  <a class="skip-link" href="#collection">Skip to products</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand header-logo" href="/" aria-label="Ladybug Stitch Co. home"><img src="/images/ladybug-stitch-logo.jpg" alt="Ladybug Stitch Co. — Custom Embroidery" width="1000" height="1000" fetchpriority="high"></a>
+      <nav aria-label="Main navigation">
+        <a href="/shop" aria-current="page">Shop</a>
+        <a href="/#gallery" class="desktop-link">Gallery</a>
+        <a href="/#about" class="desktop-link">Our story</a>
+        <a href="/#order" class="desktop-link">Custom orders</a>
+        <a class="bag-link" href="#bag">Bag <span id="bag-count">0</span></a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div id="demo-notice" class="demo-notice" hidden>Design preview · Sample products only · Payments are disabled</div>
+    <div id="return-notice" class="return-notice" hidden role="status">Welcome back! Check your Square receipt for payment confirmation. Your bag is saved here if you still need it. <button type="button" id="clear-bag">Clear bag</button></div>
+    <section class="shop-hero" aria-labelledby="shop-title">
+      <div class="hero-copy">
+        <p class="eyebrow">THE LADYBUG COLLECTION</p>
+        <h1 id="shop-title">A little stitch.<br>A little joy.</h1>
+        <p class="hero-description">Sweatshirts, tote bags &amp; makeup pouches.<br class="desktop-link"> A little handmade joy for every day.</p>
+        <a class="text-link" href="#collection">Find your next favorite <span aria-hidden="true">↘</span></a>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="hoop"><div class="hoop-inner"><svg width="108" height="108" viewBox="0 0 34 34"><circle cx="17" cy="20" r="13" fill="#C8304A"/><path d="M17 8v24" stroke="#2C1810" stroke-width="1"/><g fill="#2C1810"><circle cx="11" cy="16" r="3.2"/><circle cx="23" cy="16" r="3.2"/><circle cx="11" cy="24" r="2.5"/><circle cx="23" cy="24" r="2.5"/><ellipse cx="17" cy="9" rx="5" ry="3.5"/></g><path d="m14 7-3-4m9 4 3-4" stroke="#2C1810" stroke-width="1"/></svg><span>made with love</span></div></div>
+        <span class="art-caption">a little handmade happiness</span>
+      </div>
+    </section>
+    <div class="service-strip"><span>Ready-made embroidery</span><span>Shipping &amp; local pickup</span><span>Secure checkout with Square</span></div>
+    <section class="shop-layout" id="collection" aria-labelledby="collection-title">
+      <div class="collection">
+        <div class="collection-heading"><div><p class="eyebrow">FIND SOMETHING YOU LOVE</p><h2 id="collection-title">Shop the collection</h2></div><span id="product-count" class="muted"></span></div>
+        <div class="filters">
+          <label class="search-label"><span class="sr-only">Search products</span><input id="search" type="search" placeholder="Search the collection…" maxlength="100"></label>
+          <label class="category-label"><span class="sr-only">Filter by collection</span><select id="category"><option value="">All collections</option><option>Sweatshirts</option><option>Tote bags</option><option>Makeup pouches</option></select></label>
+        </div>
+        <p id="catalog-status" class="catalog-status" role="status">Gathering the latest stitches…</p>
+        <button id="retry" class="button secondary" type="button" hidden>Try again</button>
+        <div id="products" class="product-grid" aria-busy="true"></div>
+        <noscript><p>Please enable JavaScript to browse products and use the bag. You can also <a href="/#order">contact us</a>.</p></noscript>
+      </div>
+      <aside id="bag" class="bag" aria-labelledby="bag-title" tabindex="-1">
+        <div class="bag-heading"><h2 id="bag-title">Your bag</h2><span aria-hidden="true">♡</span></div>
+        <p id="empty-bag" class="muted">Something lovely belongs here.<br>Add a favorite to get started.</p>
+        <ul id="bag-items" class="bag-items"></ul>
+        <fieldset id="fulfillment"><legend>How would you like your order?</legend>
+          <label class="delivery-choice"><input type="radio" name="fulfillment" value="shipping" checked><span>Ship to me <small id="shipping-label">Rate shown at checkout</small></span></label>
+          <label class="delivery-choice"><input type="radio" name="fulfillment" value="pickup"><span>Local pickup <small>No shipping charge</small></span></label>
+        </fieldset>
+        <p id="fulfillment-note" class="small muted"></p>
+        <div class="totals"><div><span>Items subtotal</span><strong id="subtotal">$0.00</strong></div><div><span id="delivery-total-label">Shipping</span><span id="delivery-total">—</span></div></div>
+        <p class="small muted">Applicable taxes and final total are shown at checkout.</p>
+        <button type="button" class="button checkout" id="checkout" disabled>Continue to Square <span aria-hidden="true">↗</span></button>
+        <p id="checkout-status" class="small" role="status"></p>
+        <p class="checkout-caption">You’ll pay securely on Square and can return here afterward.</p>
+      </aside>
+    </section>
+    <section class="custom-note"><div><p class="eyebrow">HAVE SOMETHING ELSE IN MIND?</p><h2>Let’s make it personal.</h2><p>A name, a special occasion, a little idea of your own.</p></div><a class="button secondary" href="/#order">Request a custom piece <span aria-hidden="true">↗</span></a></section>
+  </main>
+  <footer><a class="footer-brand" href="/">Ladybug Stitch Co.</a><p>Custom embroidery made with love.</p><div><a href="/#order">Contact us</a><a href="/#about">Our story</a></div><small>© 2026 Ladybug Stitch Co.</small></footer>
+  <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+</body>
+</html>

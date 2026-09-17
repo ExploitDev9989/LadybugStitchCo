@@ -1,0 +1,16 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "SQUARE_ENVIRONMENT": "sandbox",
+    "SQUARE_ACCESS_TOKEN": "",
+    "SQUARE_LOCATION_ID": "",
+    "SHOP_CATEGORY_NAME": "Website Shop",
+    "SHOP_CHECKOUT_ENABLED": "false",
+    "SHOP_CURRENCY": "USD",
+    "SHOP_SITE_ORIGIN": "http://localhost:4173",
+    "SHOP_SHIPPING_FEE_CENTS": "799",
+    "SHOP_SHIPPING_DESCRIPTION": "",
+    "SHOP_PICKUP_INSTRUCTIONS": ""
+  }
+}
