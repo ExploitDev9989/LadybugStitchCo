@@ -168,3 +168,10 @@ test('build exports public assets without API source, docs or sample products', 
   for (const file of ['index.html', 'shop.html', 'assets/shop.js', 'assets/shop.css', 'staticwebapp.config.json']) assert.ok(fs.existsSync(path.join(dist, file)));
   for (const name of ['api', 'tests', 'scripts', '.git', 'SHOP_SETUP.md']) assert.equal(fs.existsSync(path.join(dist, name)), false);
 });
+
+test('Azure routes remain unique after trailing-slash normalization', () => {
+  const routing = require('../staticwebapp.config.json');
+  const normalized = routing.routes.map(rule => rule.route.replace(/\/+$/, '').toLowerCase());
+  assert.equal(new Set(normalized).size, normalized.length);
+  assert.equal(routing.routes.find(rule => rule.route === '/shop').rewrite, '/shop.html');
+});

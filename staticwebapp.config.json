@@ -2,7 +2,6 @@
   "platform": { "apiRuntime": "node:22" },
   "routes": [
     { "route": "/shop", "rewrite": "/shop.html" },
-    { "route": "/shop/", "redirect": "/shop", "statusCode": 301 },
     { "route": "/api/*", "headers": { "Cache-Control": "no-store" } }
   ],
   "globalHeaders": {

@@ -40,7 +40,7 @@ In the Azure portal, select the Static Web App serving ladybugstitch.com, then i
 | `SHOP_PICKUP_INSTRUCTIONS` | Customer-facing pickup area/location and how to arrange collection; currently undecided. Anything entered here is public. |
 | `SHOP_CHECKOUT_ENABLED` | Keep `false` until setup and checkout tests pass; then set `true` |
 
-Both existing Azure workflows are retained. They run the tests, build a public-only `dist/` directory, and deploy `api/` as managed Node.js 22 Functions. Only public HTML, images and assets are copied to `dist/`; source, tests and settings files are excluded. The two workflows may target different Azure resources, so verify which resource owns the custom domain and configure that resource.
+The active Azure workflow runs tests, builds a public-only `dist/` directory, and deploys `api/` as managed Node.js 22 Functions. Only public HTML, images and assets are copied to `dist/`; source, tests and settings files are excluded. DNS confirms that `www.ladybugstitch.com` points to `kind-coast-0441d320f.7.azurestaticapps.net`; configure that Azure resource. The older `salmon-stone-011ded70f` workflow already failed on main before this change and its deployment credential is invalid. It is retained as a manual-only workflow so it no longer creates duplicate failing deployments. No Azure resource or credential has been deleted.
 
 ## Orders and fulfillment
 

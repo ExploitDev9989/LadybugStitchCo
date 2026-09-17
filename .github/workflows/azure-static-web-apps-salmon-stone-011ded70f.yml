@@ -1,17 +1,14 @@
-name: Azure Static Web Apps CI/CD
+name: Legacy Azure deployment (manual)
 
+# www.ladybugstitch.com points to kind-coast-0441d320f.
+# This older destination already failed on main before the shop work and its
+# deployment credential is invalid. Retain it for manual recovery only.
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   build_and_deploy_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
